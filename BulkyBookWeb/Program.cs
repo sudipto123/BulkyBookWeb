@@ -7,10 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Telling the application where we have have configured our DbContext
+#pragma warning disable CS8604 // Possible null reference argument.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-
+#pragma warning restore CS8604 // Possible null reference argument.
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
